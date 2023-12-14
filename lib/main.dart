@@ -29,12 +29,12 @@ class MyApp extends StatelessWidget {
                 todos: [
                   Todo(
                     id: '1',
-                    task: 'BloC Pattern Video',
+                    task: 'BloC',
                     description: 'Explain what is the BloC Pattern',
                   ),
                   Todo(
                     id: '2',
-                    task: 'BloC Pattern Video #2',
+                    task: 'BloC #2',
                     description: 'Explain what is the BloC Pattern',
                   ),
                 ],
@@ -50,11 +50,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BloC Pattern - Todos',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          useMaterial3: true,
           primaryColor: const Color(0xFF000A1F),
-          appBarTheme: const AppBarTheme(
-            color: Color(0xFF000A1F),
-          ),
         ),
         home: const HomeScreen(),
       ),
