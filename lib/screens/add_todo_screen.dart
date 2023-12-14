@@ -17,45 +17,40 @@ class AddTodoScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('BloC Pattern: Add a To Do'),
       ),
-      body: BlocBuilder<TodosBloc, TodosState>(
-        builder: (context, state) {
-          if (state is TodosLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      body: BlocListener<TodosBloc, TodosState>(
+        listener: (context, state) {
           if (state is TodosLoaded) {
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    _inputField('ID', controllerId),
-                    _inputField('Task', controllerTask),
-                    _inputField('Description', controllerDescription),
-                    ElevatedButton(
-                      onPressed: () {
-                        var todo = Todo(
-                          id: controllerId.value.text,
-                          task: controllerTask.value.text,
-                          description: controllerDescription.value.text,
-                        );
-                        context.read<TodosBloc>().add(AddTodo(todo: todo));
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context).primaryColor,
-                      ),
-                      child: const Text('Add To Do'),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          } else {
-            return const Text('Something went wrong.');
+            ScaffoldMessenger.of(context)
+                .showSnackBar((const SnackBar(content: Text('Todo added !'))));
           }
         },
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                _inputField('ID', controllerId),
+                _inputField('Task', controllerTask),
+                _inputField('Description', controllerDescription),
+                ElevatedButton(
+                  onPressed: () {
+                    var todo = Todo(
+                      id: controllerId.value.text,
+                      task: controllerTask.value.text,
+                      description: controllerDescription.value.text,
+                    );
+                    context.read<TodosBloc>().add(AddTodo(todo: todo));
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                  child: const Text('Add To Do'),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
