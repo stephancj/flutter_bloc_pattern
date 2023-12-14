@@ -20,8 +20,8 @@ class AddTodoScreen extends StatelessWidget {
       body: BlocListener<TodosBloc, TodosState>(
         listener: (context, state) {
           if (state is TodosLoaded) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar((const SnackBar(content: Text('Todo added !'))));
+            ScaffoldMessenger.of(context).showSnackBar(
+                (const SnackBar(content: Text('New Todo added !'))));
           }
         },
         child: Card(
